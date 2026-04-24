@@ -6,8 +6,8 @@ import pandas as pd
 from train_placementPipeline import add_feature_engineering
 
 # Load the machine learning models
-classifier = joblib.load('artifacts/placement_classifier.pkl')
-regressor  = joblib.load('artifacts/salary_regressor.pkl')
+classifier = joblib.load('placement_classifier.pkl')
+regressor  = joblib.load('salary_regressor.pkl')
 
 def main():
     st.title('Student Placement & Salary Prediction')
