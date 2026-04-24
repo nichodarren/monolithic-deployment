@@ -3,7 +3,21 @@ import joblib
 import numpy as np
 import pandas as pd
 
-from train_placementPipeline import add_feature_engineering
+# from train_placementPipeline import add_feature_engineering
+
+def add_feature_engineering(df):
+    df = df.copy()
+    df["academic_avg"] = (df["tenth_percentage"] + df["twelfth_percentage"]
+                          + df["cgpa"] * 10) / 3
+    df["practical_experience"] = (df["projects_completed"]
+                                   + df["internships_completed"]
+                                   + df["hackathons_participated"])
+    df["skill_score"] = (df["coding_skill_rating"]
+                          + df["communication_skill_rating"]
+                          + df["aptitude_skill_rating"]) / 3
+    df["wellbeing_score"] = df["sleep_hours"] - 0.5 * df["stress_level"]
+    df["is_no_backlog"] = (df["backlogs"] == 0).astype(int)
+    return df
 
 # Load the machine learning models
 classifier = joblib.load('placement_classifier.pkl')
